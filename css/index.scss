@@ -37,6 +37,7 @@ body {
   background-size: 100% auto;
   background-position: top center;
   background-repeat: repeat-y;
+  cursor: url('../img/cursor-loupe.png'), zoom-in;
 
   @media(max-width: 992px) {
     background-image: url('../img/bg-red-768.webp');
@@ -55,7 +56,7 @@ body {
   padding: 0;
   border: none;
   background: none;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 [role="button"],
@@ -106,7 +107,7 @@ body {
   left: var(--_l);
   transform: var(--_transform);
   box-shadow: var(--_shadow, 9px 3px 26px 0px rgba(0, 0, 0, 0.75));
-  cursor: zoom-in;
+  cursor: url('../img/cursor-loupe.png'), zoom-in;
   z-index: var(--_zIndex);
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -242,7 +243,8 @@ body {
     --maxWidth: 16%;
     --t: 50%;
     --l: 10%;
-    --transform: rotateX(3deg) rotateY(3deg) rotateZ(-119deg);
+    // --transform: perspective(2500px) rotateX(3deg) rotateY(3deg) rotateZ(-119deg);
+    --transform: rotate(-120deg) skew(3deg, -1deg);
     --shadow: -13px -5px 20px 0px rgba(0, 0, 0, 0.87);
     transform-origin: 48% 50% 0px;
 
@@ -290,7 +292,7 @@ body {
   &:nth-child(10) {
     --maxWidth: 20%;
     --shadow: 8px 6px 11px 0px rgba(0, 0, 0, 0.6);
-    --transform: rotateX(11deg) rotateY(-11deg) rotateZ(7deg);
+    --transform: perspective(1000px) rotateX(11deg) rotateY(-11deg) rotateZ(7deg);
     --t: 15%;
     --l: 50%;
     transform-origin: 50% 50% 0px;
@@ -307,7 +309,7 @@ body {
 
   &:nth-child(11) {
     --maxWidth: 10%;
-    --transform: rotateX(7deg) rotateY(-2deg) rotateZ(-12deg);
+    --transform: perspective(1000px) rotateX(7deg) rotateY(-2deg) rotateZ(-12deg);
     --t: 10%;
     --l: 75%;
     --shadow: 5px 7px 19px 0px rgba(0, 0, 0, 0.87);
@@ -343,7 +345,7 @@ body {
     --maxWidth: 19%;
     --t: 30%;
     --l: 85%;
-    --transform: rotateX(12deg) rotateZ(24deg);
+    --transform: perspective(1200px) rotateX(12deg) rotateZ(24deg);
     --shadow: 12px 4px 11px 0px rgba(0, 0, 0, 0.6);
     transform-origin: 51% 50% 0px;
 
@@ -360,7 +362,7 @@ body {
     --maxWidth: 14%;
     --t: 37%;
     --l: 75%;
-    --transform: rotateX(13deg) rotateY(4deg) rotateZ(-15deg);
+    --transform: perspective(1000px) rotateX(13deg) rotateY(4deg) rotateZ(-15deg);
     transform-origin: 50% 50% 0px;
 
     @media(max-width: 992px) {
@@ -376,7 +378,7 @@ body {
     --maxWidth: 25%;
     --t: 48%;
     --l: 25%;
-    --transform: rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
+    --transform: perspective(1000px) rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
     --shadow: -16px 9px 11px 0px rgba(0, 0, 0, 0.87);
     transform-origin: 50% 50% 0px;
 
@@ -393,7 +395,7 @@ body {
     --maxWidth: 18%;
     --t: 35%;
     --l: 38%;
-    --transform: rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
+    --transform: perspective(1000px) rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
     --shadow: -9px 9px 11px 0px rgba(0, 0, 0, 0.5);
     transform-origin: 50% 50% 0px;
 
@@ -410,7 +412,7 @@ body {
     --maxWidth: 13%;
     --t: 38%;
     --l: -5%;
-    --transform: rotateX(4deg) rotateZ(15deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(15deg);
     transform-origin: 50% 50% 0px;
     --shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.87);
 
@@ -427,7 +429,7 @@ body {
     --maxWidth: 25%;
     --t: 62%;
     --l: 30%;
-    --transform: rotateX(4deg) rotateZ(15deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(15deg);
     transform-origin: 50% 50% 0px;
     --shadow: 0px 14px 26px 0px rgba(0, 0, 0, 0.8);
 
@@ -444,7 +446,7 @@ body {
     --maxWidth: 17%;
     --t: -2%;
     --l: 45%;
-    --transform: rotateX(4deg) rotateZ(10deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(10deg);
     transform-origin: 50% 50% 0px;
     --shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.87);
 
@@ -458,6 +460,10 @@ body {
   }
 }
 
+.cursor-pointer {
+  cursor: url('../img/pointer.svg'), pointer;
+}
+
 // animation for zoom on hover
 .zoom {
   --_transform: var(--transform);
@@ -469,11 +475,11 @@ body {
   --_zIndex: var(--zIndex, 0);
   --opacity: 1;
 
+
   &::after {
     content: '';
     position: absolute;
-    inset: -10px;
-    z-index: 1;
+    inset: 0;
   }
 
   &.in {
@@ -519,6 +525,7 @@ body {
     transform: unset;
     width: calc(var(--_maxWidth) + 4%);
     box-shadow: unset;
+
   }
 
   100% {
@@ -527,6 +534,7 @@ body {
     transform: unset;
     width: calc(var(--_maxWidth) + 4%);
     box-shadow: unset;
+    cursor: url('../img/pointer.svg'), pointer;
   }
 }
 

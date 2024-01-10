@@ -1,5 +1,10 @@
 import { ModalConstructor } from "./modal/modalconstructor.js";
-import { createHtml, getRandomEl, Zoom } from "./utils.js";
+import {
+  createHtml,
+  getRandomEl,
+  Zoom,
+  isCursorInElementsBounds,
+} from "./utils.js";
 
 function getModalPictureElem(photoFrame) {
   const pictureEl = photoFrame.querySelector("picture");
@@ -74,7 +79,7 @@ const animations = [
 photoFrames.forEach((frame) => {
   frame.classList.add("zoom");
   const animParams = getRandomEl(animations);
-  const modal = new ModalConstructor(frame, {
+  new ModalConstructor(frame, {
     autoOpen: true,
     modalInner: createInner(frame),
     animTime: animParams.duration,
@@ -91,16 +96,19 @@ photoFrames.forEach((frame) => {
 // handlers on hover and keydown for desktop
 function zoomHandlers(frame) {
   let delayTimer;
-  const handleMouseEnter = (e) => {
+  const handlePointerMove = (e) => {
+    clearTimeout(delayTimer);
     if (e.pointerType === "mouse") {
       delayTimer = setTimeout(() => {
-        Zoom.in(frame);
-      }, 800);
+        const isCusorInBounds = isCursorInElementsBounds(frame, e);
+        isCusorInBounds && Zoom.in(frame);
+      }, 1000);
     }
   };
-  const handleMouseLeave = (e) => {
+
+  const handlePointerLeave = (e) => {
+    clearTimeout(delayTimer);
     if (e.pointerType === "mouse") {
-      clearTimeout(delayTimer);
       Zoom.out(frame);
     }
   };
@@ -109,10 +117,11 @@ function zoomHandlers(frame) {
     Zoom.out(frame);
   };
 
-  frame.addEventListener("pointerenter", handleMouseEnter);
-  frame.addEventListener("pointerleave", handleMouseLeave);
+  frame.addEventListener("pointermove", handlePointerMove);
+  frame.addEventListener("pointerleave", handlePointerLeave);
   frame.addEventListener("click", handleClick);
 }
+
 //photo frame resize observer callback
 function observePhotoSize(entries) {
   const frame = entries[0];

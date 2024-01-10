@@ -39,6 +39,7 @@ export class Zoom {
     const elStyles = window.getComputedStyle(el);
     let top = elStyles.getPropertyValue("--_t");
     let left = elStyles.getPropertyValue("--_l");
+
     if (rect.left < 0) {
       left = 0 + "px";
     }
@@ -58,9 +59,6 @@ export class Zoom {
   }
 
   static in(el) {
-    if (el.classList.contains("out")) {
-      el.classList.remove("out");
-    }
     el.classList.add("in");
   }
 
@@ -69,6 +67,24 @@ export class Zoom {
       el.classList.remove("in");
       el.removeAttribute("style");
       el.classList.add("out");
+      setTimeout(() => el.classList.remove("out"), 1000);
     }
   }
+}
+
+//is cursor on target photo
+export function isCursorInElementsBounds(el, e) {
+  const boundingRect = el.getBoundingClientRect();
+  console.log(boundingRect);
+  const elW10 = boundingRect.width * 0.15;
+  const x = e.clientX;
+  const y = e.clientY;
+  const elemUnderCursor = document.elementFromPoint(x, y);
+  return (
+    elemUnderCursor === el &&
+    e.clientX >= boundingRect.left + elW10 &&
+    e.clientX <= boundingRect.right - elW10 &&
+    e.clientY >= boundingRect.top + elW10 &&
+    e.clientY <= boundingRect.bottom - elW10
+  );
 }
