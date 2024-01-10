@@ -1,26 +1,5 @@
 import { ModalConstructor } from "./modal/modalconstructor.js";
-
-// options = {
-//   tagName: 'elem-name',
-//   classes: ['class1', 'class2'],
-//   attributes: {type: 'text', 'data-set': 'value'},
-//   text: 'some text',
-//   inner: 'inner.html',
-//   value: 'value for inputs'
-// }
-function createHtml(options) {
-  const tag = document.createElement(options.tagName);
-  if (options.classes) tag.classList.add(...options.classes);
-  if (options.attributes) {
-    for (let key in options.attributes) {
-      tag.setAttribute(key, options.attributes[key]);
-    }
-  }
-  if (options.text) tag.textContent = options.text;
-  if (options.inner) tag.innerHTML = options.inner;
-  if (options.value) tag.value = options.value;
-  return tag;
-}
+import { createHtml, getRandomEl, Zoom } from "./utils.js";
 
 function getModalPictureElem(photoFrame) {
   const pictureEl = photoFrame.querySelector("picture");
@@ -83,12 +62,7 @@ function createInner(photoFrame) {
   return inner;
 }
 
-function getRandomEl(elements) {
-  const index = Math.trunc(Math.random() * elements.length);
-  return elements[index];
-}
-
-const btns = document.querySelectorAll(".photo-frame");
+const photoFrames = document.querySelectorAll(".photo-frame");
 
 // animations params
 const animations = [
@@ -97,49 +71,50 @@ const animations = [
   { animation: "three", duration: 2000 },
 ];
 
-btns.forEach((el) => {
+photoFrames.forEach((frame) => {
+  frame.classList.add("zoom");
   const animParams = getRandomEl(animations);
-  const modal = new ModalConstructor(el, {
-    autoOpen: false,
-    modalInner: createInner(el),
+  const modal = new ModalConstructor(frame, {
+    autoOpen: true,
+    modalInner: createInner(frame),
     animTime: animParams.duration,
     modalCloseBtnClass: "modal-close-btn",
     elemToFocus: ".modal-close-btn",
     modalAnimationClass: `animation-${animParams.animation}`,
   });
 
-  const mediaQuery = window.matchMedia("(max-width: 992px)");
-
-  function setHandlers(mQSize) {
-    mQSize ? mobileHandlers(modal, el) : desktopHandlers(modal, el);
-  }
-  setHandlers(mediaQuery.matches);
-  mediaQuery.addEventListener("change", (e) => {
-    setHandlers(e.matches);
-  });
+  const resizeObserver = new ResizeObserver(observePhotoSize);
+  resizeObserver.observe(frame);
+  zoomHandlers(frame);
 });
 
 // handlers on hover and keydown for desktop
-function desktopHandlers(modalEl, btnEl) {
+function zoomHandlers(frame) {
   let delayTimer;
-  const handleMouseEnter = () => {
-    delayTimer = setTimeout(() => modalEl.open(), 1000);
+  const handleMouseEnter = (e) => {
+    if (e.pointerType === "mouse") {
+      delayTimer = setTimeout(() => {
+        Zoom.in(frame);
+      }, 600);
+    }
   };
-  const handleMouseLeave = () => {
-    clearTimeout(delayTimer);
+  const handleMouseLeave = (e) => {
+    if (e.pointerType === "mouse") {
+      Zoom.out(frame);
+      clearTimeout(delayTimer);
+    }
   };
-  const handleKeydown = (e) => {
-    if (e.key !== "Enter") return;
-    modalEl.open();
-  };
-  btnEl.addEventListener("mouseenter", handleMouseEnter);
-  btnEl.addEventListener("mouseleave", handleMouseLeave);
-  btnEl.addEventListener("keydown", handleKeydown);
-}
-// handler for screens up to 992px
-function mobileHandlers(modalEl, btnEl) {
+
   const handleClick = () => {
-    modalEl.open();
+    Zoom.out(frame);
   };
-  btnEl.addEventListener("click", handleClick);
+
+  frame.addEventListener("pointerenter", handleMouseEnter);
+  frame.addEventListener("pointerleave", handleMouseLeave);
+  frame.addEventListener("click", handleClick);
+}
+//photo frame resize observer callback
+function observePhotoSize(entries) {
+  const frame = entries[0];
+  Zoom.isElementOutOfViewport(frame.target);
 }
