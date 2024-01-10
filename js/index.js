@@ -100,8 +100,8 @@ function zoomHandlers(frame) {
   };
   const handleMouseLeave = (e) => {
     if (e.pointerType === "mouse") {
-      Zoom.out(frame);
       clearTimeout(delayTimer);
+      Zoom.out(frame);
     }
   };
 
