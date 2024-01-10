@@ -102,7 +102,7 @@ function zoomHandlers(frame) {
       delayTimer = setTimeout(() => {
         const isCusorInBounds = isCursorInElementsBounds(frame, e);
         isCusorInBounds && Zoom.in(frame);
-      }, 1000);
+      }, 300);
     }
   };
 

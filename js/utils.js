@@ -67,7 +67,7 @@ export class Zoom {
       el.classList.remove("in");
       el.removeAttribute("style");
       el.classList.add("out");
-      setTimeout(() => el.classList.remove("out"), 1000);
+      setTimeout(() => el.classList.remove("out"), 800);
     }
   }
 }

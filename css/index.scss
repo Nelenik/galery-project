@@ -474,11 +474,11 @@ body {
   }
 
   &.in {
-    animation: fadeOutPhoto .3s linear forwards, showZoomed 0.5s .3s linear forwards;
+    animation: fadeOutPhoto .2s linear forwards, showZoomed 0.3s .2s linear forwards;
   }
 
   &.out {
-    animation: hideZoomed .5s linear forwards, fadeInPhoto .3s linear .5s forwards
+    animation: hideZoomed .3s linear forwards, fadeInPhoto .2s linear .3s forwards
   }
 }
 
