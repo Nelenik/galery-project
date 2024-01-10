@@ -76,15 +76,15 @@ export class Zoom {
 export function isCursorInElementsBounds(el, e) {
   const boundingRect = el.getBoundingClientRect();
   console.log(boundingRect);
-  const elW10 = boundingRect.width * 0.15;
+  const boundOffset = 10;
   const x = e.clientX;
   const y = e.clientY;
   const elemUnderCursor = document.elementFromPoint(x, y);
   return (
     elemUnderCursor === el &&
-    e.clientX >= boundingRect.left + elW10 &&
-    e.clientX <= boundingRect.right - elW10 &&
-    e.clientY >= boundingRect.top + elW10 &&
-    e.clientY <= boundingRect.bottom - elW10
+    e.clientX >= boundingRect.left + boundOffset &&
+    e.clientX <= boundingRect.right - boundOffset &&
+    e.clientY >= boundingRect.top + boundOffset &&
+    e.clientY <= boundingRect.bottom - boundOffset
   );
 }
