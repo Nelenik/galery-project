@@ -30,8 +30,8 @@ export function getRandomEl(array) {
 export class Zoom {
   static isElementOutOfViewport(el) {
     const photoWrap = document.querySelector(".photo-wrap");
-    const w = photoWrap.clientWidth;
-    const h = photoWrap.clientHeight;
+    const w = document.documentElement.clientWidth;
+    const h = document.documentElement.clientHeight;
     const rect = el.getBoundingClientRect();
     const elIsOutWindow =
       rect.left < 0 || rect.top < 0 || rect.right > w || rect.bottom > h;
@@ -58,6 +58,9 @@ export class Zoom {
   }
 
   static in(el) {
+    if (el.classList.contains("out")) {
+      el.classList.remove("out");
+    }
     el.classList.add("in");
   }
 
@@ -66,7 +69,6 @@ export class Zoom {
       el.classList.remove("in");
       el.removeAttribute("style");
       el.classList.add("out");
-      setTimeout(() => el.classList.remove("out"), 2000);
     }
   }
 }

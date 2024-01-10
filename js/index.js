@@ -95,7 +95,7 @@ function zoomHandlers(frame) {
     if (e.pointerType === "mouse") {
       delayTimer = setTimeout(() => {
         Zoom.in(frame);
-      }, 600);
+      }, 800);
     }
   };
   const handleMouseLeave = (e) => {
