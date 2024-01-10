@@ -287,7 +287,7 @@ body {
   &:nth-child(10) {
     --maxWidth: 20%;
     --shadow: 8px 6px 11px 0px rgba(0, 0, 0, 0.6);
-    --transform: perspective(1000px) rotateX(11deg) rotateY(-11deg) rotateZ(7deg);
+    --transform: rotateX(11deg) rotateY(-11deg) rotateZ(7deg);
     --t: 15%;
     --l: 50%;
     transform-origin: 50% 50% 0px;
@@ -514,7 +514,7 @@ body {
     opacity: 0;
     z-index: 100;
     transform: unset;
-    width: calc(var(--_maxWidth) + 4%);
+    width: calc(var(--_maxWidth) + 8%);
     box-shadow: unset;
 
   }
@@ -523,7 +523,7 @@ body {
     opacity: 1;
     z-index: 100;
     transform: unset;
-    width: calc(var(--_maxWidth) + 4%);
+    width: calc(var(--_maxWidth) + 8%);
     box-shadow: unset;
     cursor: url('../img/pointer.svg'), pointer;
   }
@@ -534,7 +534,7 @@ body {
     opacity: 1;
     z-index: 100;
     transform: unset;
-    width: calc(var(--_maxWidth) + 4%);
+    width: calc(var(--_maxWidth) + 8%);
     box-shadow: unset;
   }
 
