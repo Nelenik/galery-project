@@ -37,9 +37,11 @@ body {
   background-size: 100% auto;
   background-position: top center;
   background-repeat: repeat-y;
+  cursor: url('../img/loupe-lg.png'), zoom-in;
 
   @media(max-width: 992px) {
     background-image: url('../img/bg-red-768.webp');
+    cursor: url('../img/loupe.png'), zoom-in;
   }
 
   &::after {
@@ -96,6 +98,7 @@ body {
   --_shadow: var(--shadow);
   --_t: var(--t);
   --_l: var(--l);
+  --_zIndex: var(--zIndex, 0);
   width: var(--_maxWidth);
   padding: 6px 6px var(--_lpb, 6px);
   background-color: rgba(230, 235, 236, 0.808);
@@ -105,7 +108,8 @@ body {
   left: var(--_l);
   transform: var(--_transform);
   box-shadow: var(--_shadow, 9px 3px 26px 0px rgba(0, 0, 0, 0.75));
-  cursor: zoom-in;
+  cursor: url('../img/loupe-lg.png'), zoom-in;
+  z-index: var(--_zIndex);
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: filter 0.4s ease, outline-color 0.4s ease, scale 0.4s ease;
@@ -119,14 +123,8 @@ body {
     filter: brightness(55%);
   }
 
-  @media(hover:hover) {
-    &:hover {
-      scale: 1.1;
-    }
-
-    &:hover picture {
-      filter: brightness(65%);
-    }
+  @media(max-width: 992px) {
+    cursor: url('../img/loupe.png'), zoom-in;
   }
 
   @media(max-width: 600px) {
@@ -143,7 +141,7 @@ body {
     --shadow: -11px 13px 11px 0px rgba(0, 0, 0, 0.6);
     --t: 20%;
     --l: 30%;
-    z-index: 1;
+    --zIndex: 1;
 
     @media(max-width: 992px) {
       --maxWidth: 20%;
@@ -161,7 +159,7 @@ body {
     --shadow: -10px 13px 11px 0px rgba(0, 0, 0, 0.87);
     --t: 15%;
     --l: 25%;
-    z-index: 2;
+    --zIndex: 2;
 
     @media(max-width: 992px) {
       --maxWidth: 20%;
@@ -178,7 +176,7 @@ body {
     --t: 35%;
     --l: 55%;
     --transform: rotate(5deg) skew(-1deg, -1deg);
-    z-index: 2;
+    --zIndex: 2;
 
     @media(max-width: 992px) {
       --maxWidth: 25%;
@@ -240,7 +238,8 @@ body {
     --maxWidth: 16%;
     --t: 50%;
     --l: 10%;
-    --transform: rotateX(3deg) rotateY(3deg) rotateZ(-119deg);
+    // --transform: perspective(2500px) rotateX(3deg) rotateY(3deg) rotateZ(-119deg);
+    --transform: rotate(-120deg) skew(3deg, -1deg);
     --shadow: -13px -5px 20px 0px rgba(0, 0, 0, 0.87);
     transform-origin: 48% 50% 0px;
 
@@ -258,7 +257,7 @@ body {
     --t: 50%;
     --l: 55%;
     --transform: rotate(7deg);
-    z-index: 2;
+    --zIndex: 2;
 
     @media(max-width: 992px) {
       --maxWidth: 17%;
@@ -292,7 +291,7 @@ body {
     --t: 15%;
     --l: 50%;
     transform-origin: 50% 50% 0px;
-    z-index: 1;
+    --zIndex: 1;
 
     @media(max-width: 992px) {
       --maxWidth: 25%;
@@ -304,8 +303,8 @@ body {
   }
 
   &:nth-child(11) {
-    --maxWidth: 10%;
-    --transform: rotateX(7deg) rotateY(-2deg) rotateZ(-12deg);
+    --maxWidth: 15%;
+    --transform: perspective(1000px) rotateX(7deg) rotateY(-2deg) rotateZ(-12deg);
     --t: 10%;
     --l: 75%;
     --shadow: 5px 7px 19px 0px rgba(0, 0, 0, 0.87);
@@ -341,7 +340,7 @@ body {
     --maxWidth: 19%;
     --t: 30%;
     --l: 85%;
-    --transform: rotateX(12deg) rotateZ(24deg);
+    --transform: perspective(1200px) rotateX(12deg) rotateZ(24deg);
     --shadow: 12px 4px 11px 0px rgba(0, 0, 0, 0.6);
     transform-origin: 51% 50% 0px;
 
@@ -358,7 +357,7 @@ body {
     --maxWidth: 14%;
     --t: 37%;
     --l: 75%;
-    --transform: rotateX(13deg) rotateY(4deg) rotateZ(-15deg);
+    --transform: perspective(1000px) rotateX(13deg) rotateY(4deg) rotateZ(-15deg);
     transform-origin: 50% 50% 0px;
 
     @media(max-width: 992px) {
@@ -374,7 +373,7 @@ body {
     --maxWidth: 25%;
     --t: 48%;
     --l: 25%;
-    --transform: rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
+    --transform: perspective(1000px) rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
     --shadow: -16px 9px 11px 0px rgba(0, 0, 0, 0.87);
     transform-origin: 50% 50% 0px;
 
@@ -391,7 +390,7 @@ body {
     --maxWidth: 18%;
     --t: 35%;
     --l: 38%;
-    --transform: rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
+    --transform: perspective(1000px) rotateX(6deg) rotateY(7deg) rotateZ(-11deg);
     --shadow: -9px 9px 11px 0px rgba(0, 0, 0, 0.5);
     transform-origin: 50% 50% 0px;
 
@@ -408,7 +407,7 @@ body {
     --maxWidth: 13%;
     --t: 38%;
     --l: -5%;
-    --transform: rotateX(4deg) rotateZ(15deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(15deg);
     transform-origin: 50% 50% 0px;
     --shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.87);
 
@@ -425,7 +424,7 @@ body {
     --maxWidth: 25%;
     --t: 62%;
     --l: 30%;
-    --transform: rotateX(4deg) rotateZ(15deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(15deg);
     transform-origin: 50% 50% 0px;
     --shadow: 0px 14px 26px 0px rgba(0, 0, 0, 0.8);
 
@@ -442,7 +441,7 @@ body {
     --maxWidth: 17%;
     --t: -2%;
     --l: 45%;
-    --transform: rotateX(4deg) rotateZ(10deg);
+    --transform: perspective(1000px) rotateX(4deg) rotateZ(10deg);
     transform-origin: 50% 50% 0px;
     --shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.87);
 
@@ -456,293 +455,93 @@ body {
   }
 }
 
-/* dynamic modal */
-.modal-overlay {
-  position: fixed;
-  overflow-y: auto;
-  height: 100%;
-  inset: 0;
-  padding: 20px 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+// animation for zoom on hover
+.zoom {
+  --_transform: var(--transform);
+  --_maxWidth: var(--maxWidth, 10%);
+  --_lpb: var(--lpb);
+  --_shadow: var(--shadow);
+  --_t: var(--t);
+  --_l: var(--l);
+  --_zIndex: var(--zIndex, 0);
+  --opacity: 1;
 
-  /* Hide scrollbar для IE, Edge и Firefox */
-  -ms-overflow-style: none;
-  /* IE и Edge */
-  scrollbar-width: none;
 
-  /* Firefox */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  //animation
-  &.animation-one {
-    transform: scale(0) rotate(-180deg);
-    opacity: 0;
-    visibility: hidden;
-    z-index: -10;
-
-    &.openAnim {
-      transform: scale(1) rotate(0);
-      visibility: visible;
-      opacity: 1;
-      z-index: 1000;
-    }
-
-    &.outAnim {
-      transform: scale(0);
-    }
-  }
-
-  &.animation-two {
-    transform: scale(0);
-    z-index: 1000;
-
-    &.openAnim {
-      animation: fadeIn 0.5s forwards;
-
-      .modal-wrapper {
-        animation: modalIn 1.3s forwards;
-      }
-    }
-
-    &.outAnim {
-      transform: translateY(0) scale(1);
-      animation: fadeOut 1.5s forwards;
-
-      .modal-wrapper {
-        opacity: 1;
-        animation: modalOut 1.5s forwards;
-      }
-    }
-  }
-
-  &.animation-three {
-    z-index: 1000;
-    transform: scaleY(.01) scaleX(0);
-
-    &.openAnim {
-      animation: unfoldIn .7s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-
-      .modal-wrapper {
-        opacity: 0;
-        animation: zoomIn .7s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      }
-
-    }
-
-    &.outAnim {
-      transform: scaleY(1);
-      animation: unfoldOut .7s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-
-      .modal-wrapper {
-        animation: zoomOut .7s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      }
-    }
-  }
-
-}
-
-.modal-wrapper {
-  position: relative;
-  width: min(90%, 900px);
-  // min-height: 50vh;
-  margin: 0 auto;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: auto;
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 50px;
-  aspect-ratio: 1/1;
-  background-image: linear-gradient(19deg, rgba(88, 148, 77, 0.8) 0%, rgba(220, 186, 114, 0.8) 100%);
-  border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
-
-  &:focus {
-    outline: 2px solid #cee220;
-  }
-
-  @media(max-width: 600px) {
-    width: 30px;
-  }
-
-  svg {
+  &::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
+    inset: 0;
+  }
 
-    path {
-      fill: #cee220;
-      stroke: #cee220;
-    }
+  &.in {
+    animation: fadeOutPhoto .2s linear forwards, showZoomed 0.3s .2s linear forwards;
+  }
+
+  &.out {
+    animation: hideZoomed .3s linear forwards, fadeInPhoto .2s linear .3s forwards
   }
 }
 
-.inner {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  &__img {
-    display: block;
-    width: 100%;
-  }
-
-  &__content {
-    padding: 50px 50px;
-    background-image: linear-gradient(19deg, rgba(88, 148, 77, 0.8) 0%, rgba(220, 186, 114, 0.8) 100%);
-    backdrop-filter: blur(15px);
-
-    @media(max-width: 600px) {
-      padding: 30px;
-    }
-  }
-
-  &__title {
-    margin: 0;
-    margin-bottom: 20px;
-    font-size: clamp(1.1rem, 12.8vw - 4.5rem, 3.5rem);
-    line-height: 150%;
-    color: #b73c35;
-    text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.8);
-    letter-spacing: .2rem;
-
-    @media(max-width: 992px) {
-      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    }
-  }
-
-  &__descr {
-    margin: 0;
-    line-height: 150%;
-    font-size: clamp(1.1rem, 5.3vw - 1.3rem, 2rem);
-    color: #bb1503;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    letter-spacing: .2rem;
-
-    @media(max-width: 992px) {
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-  }
-}
-
-//in/out animations
-
-/*animation-two*/
-@keyframes fadeIn {
+@keyframes fadeOutPhoto {
   0% {
-    transform: scale(0);
-  }
-
-  95% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-
-  100% {
-    transform: scale(0) translateY(300px);
-  }
-}
-
-@keyframes modalIn {
-  0% {
-    transform: translateX(-2000px);
-    border-radius: 100%;
-    width: 30%;
-    aspect-ratio: 1/1;
-    // scale: 0.3;
-  }
-
-  80% {
-    transform: translateX(0);
-    // scale: 0.3;
-    width: 30%;
-    aspect-ratio: 1/1;
-    border-radius: 100%;
-  }
-
-  100% {
-    height: unset;
-    // scale: 1;
-    aspect-ratio: unset;
-    width: min(90%, 900px);
-    border-radius: 10px;
-  }
-}
-
-@keyframes modalOut {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(1);
     opacity: 1;
   }
 
   100% {
-    transform: translateY(500px) rotate(80deg) scale(0.3);
     opacity: 0;
   }
 }
 
-/*animation-three*/
-@keyframes unfoldIn {
+@keyframes fadeInPhoto {
   0% {
-    transform: scaleY(.005) scaleX(0);
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes showZoomed {
+  0% {
+    opacity: 0;
+    --_transform: var(--transform);
+    --_maxWidth: var(--maxWidth, 10%);
+    --_shadow: var(--shadow);
   }
 
   50% {
-    transform: scaleY(.005) scaleX(1);
-  }
-
-  100% {
-    transform: scaleY(1) scaleX(1);
-  }
-}
-
-@keyframes unfoldOut {
-  0% {
-    transform: scaleY(1) scaleX(1);
-  }
-
-  50% {
-    transform: scaleY(.005) scaleX(1);
-  }
-
-  100% {
-    transform: scaleY(.005) scaleX(0);
-  }
-}
-
-@keyframes zoomIn {
-  0% {
     opacity: 0;
+    z-index: 100;
+    transform: unset;
+    width: calc(var(--_maxWidth) + 8%);
+    box-shadow: unset;
+
   }
 
   100% {
     opacity: 1;
+    z-index: 100;
+    transform: unset;
+    width: calc(var(--_maxWidth) + 8%);
+    box-shadow: unset;
+    cursor: url('../img/pointer.svg'), pointer;
   }
 }
 
-@keyframes zoomOut {
+@keyframes hideZoomed {
   0% {
     opacity: 1;
+    z-index: 100;
+    transform: unset;
+    width: calc(var(--_maxWidth) + 8%);
+    box-shadow: unset;
   }
 
   100% {
     opacity: 0;
+    --_transform: var(--transform);
+    --_maxWidth: var(--maxWidth, 10%);
+    --_shadow: var(--shadow);
   }
 }
