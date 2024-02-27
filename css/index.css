@@ -25,7 +25,7 @@ img {
 }
 
 body {
-  font-family: "Comfortaa", sans-serif;
+  font-family: "Sen", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -72,13 +72,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  width: 250px;
 }
 .nav__link {
   position: relative;
   z-index: 1;
   display: inline-block;
   padding: 15px 20px;
-  width: 230px;
+  width: 100%;
   border-radius: 0 20px 20px 0;
   background: linear-gradient(19deg, rgba(128, 203, 115, 0.8) 0%, rgba(220, 186, 114, 0.8) 100%);
   -webkit-backdrop-filter: blur(5px);
@@ -86,7 +87,7 @@ body {
   color: #b73c35;
   text-shadow: 2px 2px 2px rgba(175, 160, 160, 0.8);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: center;
   transition: color 0.4s linear, text-shadow 0.4s linear;
   box-shadow: 3px 3px 2px 0 rgba(136, 104, 83, 0.737254902);
@@ -135,14 +136,14 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../img/bg-red.webp");
+  background-image: url("../img/red.webp");
   background-size: 100% auto;
   background-position: top center;
   cursor: url("../img/loupe-lg.png"), zoom-in;
 }
 @media (max-width: 992px) {
   .photo-page {
-    background-image: url("../img/bg-red-768.webp");
+    background-image: url("../img/red-768.webp");
     cursor: url("../img/loupe.png"), zoom-in;
   }
 }
@@ -150,7 +151,7 @@ body {
   position: absolute;
   inset: 0;
   content: "";
-  background-color: rgba(236, 240, 3, 0.067);
+  background-color: rgba(79, 32, 32, 0.349);
 }
 
 .photo-wrap {
@@ -178,10 +179,10 @@ body {
   --_l: var(--l);
   --_zIndex: var(--zIndex, 0);
   width: var(--_maxWidth);
-  padding: 6px 6px var(--_lpb, 6px);
+  padding: 2px 2px var(--_lpb, 2px);
   background-color: rgba(230, 235, 236, 0.808);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   position: absolute;
   top: var(--_t);
   left: var(--_l);
@@ -639,7 +640,7 @@ body {
   height: 100vh;
   overflow: hidden;
   padding-top: 150px;
-  background-image: url("../img/beige.webp");
+  background-image: url("https://catherineasquithgallery.com/uploads/posts/2021-02/thumbs/1613369490_69-p-fon-dlya-saita-bezhevii-78.jpg");
   background-size: 100% auto;
 }
 @media (max-width: 992px) {
@@ -651,12 +652,18 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(133, 37, 34, 0.3411764706);
+  background-color: rgba(107, 59, 57, 0.4117647059);
   -webkit-backdrop-filter: sepia(50%);
           backdrop-filter: sepia(50%);
 }
 .upload-page__title {
+  background-image: url("../img/red-768.webp");
+  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 2.5rem;
+  font-weight: 900;
 }
 .upload-page__form {
   width: min(100%, 800px);
@@ -676,8 +683,6 @@ body {
 }
 
 .neumorf-field {
-  background-color: rgba(133, 86, 59, 0.1254901961);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  box-shadow: inset -3px -3px 5px -2px rgba(236, 234, 231, 0.662), inset 2px 1px 5px 3px rgba(37, 27, 6, 0.216);
+  background-color: rgba(91, 34, 1, 0.1215686275);
+  box-shadow: inset -1px -3px 8px -1px rgba(250, 250, 250, 0.662), inset 2px 2px 5px -1px rgba(37, 27, 6, 0.341);
 }/*# sourceMappingURL=index.css.map */
