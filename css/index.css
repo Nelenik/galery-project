@@ -25,8 +25,9 @@ img {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Comfortaa", sans-serif;
   font-weight: 400;
+  font-style: normal;
 }
 
 .btn-reset {
@@ -64,7 +65,6 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
   z-index: 1000;
 }
 
@@ -77,19 +77,19 @@ body {
   position: relative;
   z-index: 1;
   display: inline-block;
-  padding: 15px 30px;
-  width: 280px;
+  padding: 15px 20px;
+  width: 230px;
   border-radius: 0 20px 20px 0;
   background: linear-gradient(19deg, rgba(128, 203, 115, 0.8) 0%, rgba(220, 186, 114, 0.8) 100%);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   color: #b73c35;
   text-shadow: 2px 2px 2px rgba(175, 160, 160, 0.8);
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1rem;
   text-align: center;
   transition: color 0.4s linear, text-shadow 0.4s linear;
-  box-shadow: inset 0px -5px 11px 1px rgba(255, 217, 0, 0.541);
+  box-shadow: 3px 3px 2px 0 rgba(136, 104, 83, 0.737254902);
   outline: none;
 }
 .nav__link::before {
@@ -118,6 +118,12 @@ body {
   /* IE и Edge */
   scrollbar-width: none;
   /* Firefox */
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.section {
+  scroll-snap-align: start;
 }
 
 .main::-webkit-scrollbar {
@@ -632,8 +638,14 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../img/gold-bg.webp");
+  padding-top: 150px;
+  background-image: url("../img/beige.webp");
   background-size: 100% auto;
+}
+@media (max-width: 992px) {
+  .upload-page {
+    background-image: url("../img/beige-768.webp");
+  }
 }
 .upload-page::before {
   content: "";
@@ -642,4 +654,30 @@ body {
   background-color: rgba(133, 37, 34, 0.3411764706);
   -webkit-backdrop-filter: sepia(50%);
           backdrop-filter: sepia(50%);
+}
+.upload-page__title {
+  text-align: center;
+}
+.upload-page__form {
+  width: min(100%, 800px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: none;
+  resize: none;
+}
+
+.neumorf-field {
+  background-color: rgba(133, 86, 59, 0.1254901961);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  box-shadow: inset -3px -3px 5px -2px rgba(236, 234, 231, 0.662), inset 2px 1px 5px 3px rgba(37, 27, 6, 0.216);
 }/*# sourceMappingURL=index.css.map */
