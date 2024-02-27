@@ -1,3 +1,5 @@
+:root {}
+
 html {
   box-sizing: border-box;
 }
@@ -20,7 +22,6 @@ p {
 img {
   object-fit: cover;
   max-width: 100%;
-  /* height: auto; */
 }
 
 body {
@@ -28,30 +29,7 @@ body {
   font-weight: 400;
 }
 
-.page {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-image: url("../img/bg-red.webp");
-  background-size: 100% auto;
-  background-position: top center;
-  background-repeat: repeat-y;
-  cursor: url('../img/loupe-lg.png'), zoom-in;
 
-  @media(max-width: 992px) {
-    background-image: url('../img/bg-red-768.webp');
-    cursor: url('../img/loupe.png'), zoom-in;
-  }
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    content: '';
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(2px);
-  }
-}
 
 .btn-reset {
   padding: 0;
@@ -65,6 +43,12 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+.mg-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .hidden {
   display: none;
 }
@@ -72,16 +56,116 @@ body {
 .container {
   position: relative;
   height: 100%;
-  width: min(100%, 1600px);
+  width: 100%;
   padding: 0 20px;
   margin: 0 auto;
   z-index: 1;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  &__item {}
+
+  &__link {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 15px 30px;
+    width: 280px;
+    border-radius: 0 20px 20px 0;
+    background: linear-gradient(19deg, rgba(128, 203, 115, 0.8) 0%, rgba(220, 186, 114, 0.8) 100%);
+    backdrop-filter: blur(5px);
+    color: #b73c35;
+    text-shadow: 2px 2px 2px rgb(175 160 160 / 80%);
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    transition: color 0.4s linear, text-shadow 0.4s linear;
+    box-shadow: inset 0px -5px 11px 1px rgba(255, 217, 0, 0.541);
+    outline: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: 0 0 20px 20px;
+      background-color: rgba(255, 255, 255, 0.334);
+      opacity: 0;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: rgba(237, 240, 3, 0.8);
+      text-shadow: 2px 2px 2px #b73c35;
+    }
+
+    &:focus-visible {
+      &::before {
+        opacity: 0.5
+      }
+    }
+  }
+}
+
+.main {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+
+  // hide scrollbar
+  -ms-overflow-style: none;
+  /* IE и Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+// photo section
+.photo-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../img/bg-red.webp");
+  background-size: 100% auto;
+  background-position: top center;
+  cursor: url('../img/loupe-lg.png'), zoom-in;
+
+  @media(max-width: 992px) {
+    background-image: url('../img/bg-red-768.webp');
+    cursor: url('../img/loupe.png'), zoom-in;
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-color: rgba(236, 240, 3, 0.067);
+  }
+}
+
+
 .photo-wrap {
   position: relative;
   height: 100%;
-
+  // display: none;
 }
 
 .photo {
@@ -94,9 +178,12 @@ body {
 .photo-frame {
   --_transform: var(--transform);
   --_maxWidth: var(--maxWidth, 10%);
+  /*large padding bottom*/
   --_lpb: var(--lpb);
   --_shadow: var(--shadow);
+  /*top*/
   --_t: var(--t);
+  /*left*/
   --_l: var(--l);
   --_zIndex: var(--zIndex, 0);
   width: var(--_maxWidth);
@@ -131,9 +218,14 @@ body {
     padding: 3px 3px var(--_lpb, 3px);
   }
 
+  @media(max-height: 1025px)and (min-width: 801px) {
+    width: calc(var(--_maxWidth) - 5vh);
+  }
+
   @media(max-height: 800px)and (min-width: 576px) {
     width: calc(var(--_maxWidth) - 7vh);
   }
+
 
   &:nth-child(1) {
     --maxWidth: 15%;
@@ -543,5 +635,24 @@ body {
     --_transform: var(--transform);
     --_maxWidth: var(--maxWidth, 10%);
     --_shadow: var(--shadow);
+  }
+}
+
+// upload-page
+
+.upload-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../img/gold-bg.webp");
+  background-size: 100% auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #85252257;
+    backdrop-filter: sepia(50%);
   }
 }

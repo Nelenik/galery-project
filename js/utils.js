@@ -30,27 +30,30 @@ export function getRandomEl(array) {
 export class Zoom {
   static isElementOutOfViewport(el) {
     const photoWrap = document.querySelector(".photo-wrap");
-    const w = document.documentElement.clientWidth;
-    const h = document.documentElement.clientHeight;
-    const rect = el.getBoundingClientRect();
+    const w = photoWrap.clientWidth;
+    const h = photoWrap.clientHeight;
+    const elRect = el.getBoundingClientRect();
     const elIsOutWindow =
-      rect.left < 0 || rect.top < 0 || rect.right > w || rect.bottom > h;
+      elRect.left < 0 ||
+      elRect.top < 0 ||
+      elRect.right > w ||
+      elRect.bottom > h;
 
     const elStyles = window.getComputedStyle(el);
     let top = elStyles.getPropertyValue("--_t");
     let left = elStyles.getPropertyValue("--_l");
 
-    if (rect.left < 0) {
+    if (elRect.left < 0) {
       left = 0 + "px";
     }
-    if (rect.right > w) {
-      left = w - rect.width + "px";
+    if (elRect.right > w) {
+      left = w - elRect.width + "px";
     }
-    if (rect.top < 0) {
+    if (elRect.top < 0) {
       top = 0 + "px";
     }
-    if (rect.bottom > h) {
-      top = h - rect.height + "px";
+    if (elRect.bottom > h) {
+      top = h - (elRect.height + 50) + "px";
     }
     if (el.classList.contains("in") && elIsOutWindow) {
       el.style.setProperty("--_l", left);
@@ -70,21 +73,4 @@ export class Zoom {
       setTimeout(() => el.classList.remove("out"), 800);
     }
   }
-}
-
-//is cursor on target photo
-export function isCursorInElementsBounds(el, e) {
-  const boundingRect = el.getBoundingClientRect();
-  console.log(boundingRect);
-  const boundOffset = 10;
-  const x = e.clientX;
-  const y = e.clientY;
-  const elemUnderCursor = document.elementFromPoint(x, y);
-  return (
-    elemUnderCursor === el &&
-    e.clientX >= boundingRect.left + boundOffset &&
-    e.clientX <= boundingRect.right - boundOffset &&
-    e.clientY >= boundingRect.top + boundOffset &&
-    e.clientY <= boundingRect.bottom - boundOffset
-  );
 }
