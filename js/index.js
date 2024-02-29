@@ -4,24 +4,20 @@ import { _ } from "./utils.js";
 modalInit();
 initImagePreview();
 
+/* if is necessary to disable scroll activate code below */
 // const mainBlock = document.getElementById("main");
 // mainBlock.addEventListener("wheel", (e) => {
 //   e.preventDefault();
 // });
 
-// const form = _('[name="uploadForm"]');
-
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   const formData = new FormData(form);
-//   console.log([...formData]);
-
-//   form.reset();
-//   _('[id="imagePreview"]').innerHTML = "";
-// });
-
-const validator = new window.JustValidate(_('[name="uploadForm"]'));
+//form validation, is used JustValidate plugin
+const validator = new window.JustValidate(_('[name="uploadForm"]'), {
+  errorLabelCssClass: ["fieldWrap__invalidFieldMessage"],
+  errorFieldCssClass: ["fieldWrap__invalidField"],
+  errorLabelStyle: {
+    color: "#c30f7e",
+  },
+});
 
 validator
   .addField('[name="name"]', [
@@ -44,8 +40,14 @@ validator
   ])
   .addField('[name="uploadField"]', [
     {
+      rule: "minFilesCount",
+      value: 1,
+      errorMessage: "File is not selected",
+    },
+    {
       rule: "maxFilesCount",
       value: 1,
+      errorMessage: "Max 1 file can be uploaded",
     },
     {
       rule: "files",
@@ -54,6 +56,7 @@ validator
           maxSize: 2097152,
         },
       },
+      errorMessage: "Max file size 2MB",
     },
   ])
   .onSuccess((event) => {

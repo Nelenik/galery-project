@@ -724,6 +724,7 @@ body {
   }
 }
 .uploadForm__footer {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
 }
@@ -736,8 +737,10 @@ body {
   border-radius: 10px;
 }
 
-.fieldWrap--image {
+.fieldWrap {
   position: relative;
+}
+.fieldWrap--image {
   width: 60%;
 }
 .fieldWrap__label {
@@ -762,6 +765,7 @@ body {
   background: none;
   resize: none;
   transition: background-color 0.4s ease;
+  color: var(--gold-text);
 }
 @media (max-width: 768px) {
   .fieldWrap__field {
@@ -778,6 +782,28 @@ body {
   .fieldWrap__field--descr {
     height: unset;
   }
+}
+.fieldWrap__invalidFieldMessage {
+  position: absolute;
+  top: 8%;
+  right: 0;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0 3px;
+  background-color: black;
+  border-radius: 3px;
+}
+.fieldWrap__invalidField {
+  border: 1px solid #c30f7e;
+  outline: 2px solid black;
+  outline-offset: 3px;
+}
+.fieldWrap__invalidField + .uploadField-custom {
+  border: 1px solid #c30f7e;
+  outline: 2px solid black;
+  outline-offset: 3px;
 }
 
 .neumorf-field {
@@ -815,6 +841,10 @@ body {
   fill: var(--gold-text);
   transition: fill 0.4s ease;
 }
+.uploadField-custom + .fieldWrap__invalidFieldMessage {
+  top: unset;
+  bottom: 115%;
+}
 
 .file-preview-img {
   -o-object-fit: contain;
@@ -825,8 +855,4 @@ body {
 }
 .file-preview-img:hover {
   scale: 1.7;
-}
-
-.just-validate-error-label {
-  background-color: white;
 }/*# sourceMappingURL=index.css.map */
