@@ -74,3 +74,8 @@ export class Zoom {
     }
   }
 }
+
+//function gets elements by selector
+export function _(selector, container = document) {
+  return container.querySelector(selector);
+}
