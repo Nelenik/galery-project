@@ -6,6 +6,8 @@ export const initImagePreview = () => {
   const previewBlock = _('[id="imagePreview"]');
 
   uploadFileInput.addEventListener("change", () => {
+    const mediaQue = window.matchMedia("(max-width: 1024px");
+    if (mediaQue.matches) return;
     uploadFiles(uploadFileInput.files[0], displayPreview);
   });
 

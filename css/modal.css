@@ -124,7 +124,7 @@
 }
 @media (max-width: 600px) {
   .inner__content {
-    padding: 30px;
+    padding: 19px 23px;
   }
 }
 .inner__like {
@@ -245,6 +245,12 @@
   display: inline-block;
   width: var(--initWidth);
   height: var(--initHeight);
+}
+@media (max-width: 576px) {
+  .heart {
+    --initWidth: 27.5px;
+    --initHeight: 25px;
+  }
 }
 .heart svg {
   --heartColor: rgba(167, 15, 15, 1);

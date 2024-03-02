@@ -18,6 +18,11 @@ export const initBurger = () => {
     menu.classList.contains("js-menu--open") ? closeMenu() : openMenu();
   });
 
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav__link")) return;
+    closeMenu();
+  });
+
   document.addEventListener("DOMContentLoaded", (e) => {
     setTimeout(closeMenu, 3000);
   });

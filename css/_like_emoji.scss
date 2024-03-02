@@ -31,6 +31,12 @@
   --initWidth: 44px;
   --initHeight: 40px;
 
+  @media (max-width: 576px) {
+    --initWidth: 27.5px;
+    --initHeight: 25px;
+
+  }
+
   position: relative;
   cursor: pointer;
   display: inline-block;
