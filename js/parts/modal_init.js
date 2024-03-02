@@ -1,6 +1,7 @@
 import { ModalConstructor } from "../modal/modalconstructor.js";
 import { createHtml, getRandomEl, Zoom } from "../utils.js";
 import { zoomHandlers } from "./zoom_handlers.js";
+import LikeEmoji from "./LikeEmoji.js";
 
 export const modalInit = () => {
   const photoFrames = document.querySelectorAll(".photo-frame");
@@ -15,13 +16,16 @@ export const modalInit = () => {
   photoFrames.forEach((frame) => {
     frame.classList.add("zoom");
     const animParams = getRandomEl(animations);
-    new ModalConstructor(frame, {
-      autoOpen: true,
-      modalInner: createInner(frame),
-      animTime: animParams.duration,
-      modalCloseBtnClass: "modal-close-btn",
-      elemToFocus: ".modal-close-btn",
-      modalAnimationClass: `animation-${animParams.animation}`,
+
+    frame.addEventListener("click", (e) => {
+      const frameModal = new ModalConstructor(frame, {
+        modalInner: createInner(frame),
+        animTime: animParams.duration,
+        modalCloseBtnClass: "modal-close-btn",
+        elemToFocus: ".modal-close-btn",
+        modalAnimationClass: `animation-${animParams.animation}`,
+      });
+      frameModal.open();
     });
 
     const resizeObserver = new ResizeObserver(observePhotoSize);
@@ -85,6 +89,17 @@ function createInner(photoFrame) {
     </svg>
     `,
   });
+
+  // like emojy init
+  const likeEmoji = new LikeEmoji({
+    container: innerContent,
+    additCssClass: "inner__like",
+  });
+
+  likeEmoji.onChange(() => {
+    //do smth on like emoji switch (for example request to server)
+  });
+
   const innerPicture = getModalPictureElem(photoFrame);
   innerContent.append(innerTitle, innerDescr);
   inner.append(innerPicture, innerContent, innerCloseBtn);

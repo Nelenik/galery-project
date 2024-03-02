@@ -1,51 +1,52 @@
 Initialization:
-  let modal = new ModalConstructor(triggerSelectorOrEl, options)
-  По умолчанию открытие окна нужно настроить принудительно методом modal.open(). Если нужно, чтобы окно автоматически открывалось при клике на триггер(например содержимое известно и не будет меняться, или на триггере кроме открытия нет других действий), то нужно добавить настройку autoOpen: true;
+let modal = new ModalConstructor(triggerSelectorOrEl, options)
 
-  - triggerSelectorOrEl - string, селектор или элемент по клику на который открывается окно. (Если окно статическое(скрыто в разметке), то для триггера добавляем - data-path =
-  "value", для контента - data-modal="value");
-  -options = объект с настройками.
+By default, window opening should be configured forcefully with the modal.open() method. If you need the window to open automatically when clicking on the trigger (for example, if the content is known and will not change, or if there are no other actions besides opening on the trigger), you need to add the autoOpen: true option.
+
+--triggerSelectorOrEl - string, selector or element on click of which the window opens. (If the window is static (hidden in markup), for the trigger, add - data-path = "value", for the content - data-modal="value");
+--options = object with settings.
 
 Options:
-  -- autoOpen: (boolean, default=false) указываем должно ли окно открываться автоматически плагином. По умолчанию false,  для октытия окна нужно воспользоваться методом modal.open()
-  -- isStatic: (boolean, default=false) указываем статичное или динамичное модальное окно;
-  -- modalInner: (html/el, default = null), контент модального окна при динамическом создании.(конструктор создает оверлей и обертку контента, кнопку закрытия и сам контент можно добавить в этой настройке);
-  -- enableTransition: (boolean, default = true) если true настраивается transition для появления окна. Если false можно настроить анимацию с помощью библиотеки (например GreenSock) В случае сторонней анимации для динамического окна обязательно нужно указать animTime, который будет задержкой при удалении из DOM(значение нужно согласовать со временем анимации библиотеки)
-  -- animTime: (ms, default=null) время анимации. Этот параметр нужно указывать при настройке анимации с помощью библиотеки, т.к. он также является задержкой удаления модалки из DOM
-  -- easing: (string, default = 'ease') название easing-функции для transition
-  -- elemToFocus: (string, default=null) передаем селектор элемента, который должен быть в фокусе при открытии модального окна.Если не задано фокус устанавливается первому фокусируемому элементу в модалке
-  //классы
-  -- modalCloseBtnClass: (string, default-null) класс кнопки закрытия(если есть)(для динамических окон ее также нужно создать самостоятельно)
-  -- modalOverlayClass: (string, default="modal-overlay"),класс оверлея, дефолтный класс добавляется при динамическом создании, для статических окон нужно передать соответствующие классы
-  -- modalWrapperClass: (string, default="modal-wrapper"), класс обертки контента
-  -- modalAnimationClass: (string, default ="modalInitAnim"),класс начального состояния анимации.
-  -- modalInAnimClass: (string, default="openAnim"), класс анимации открытия окна,
-  -- modalOutAnimClass: (string, default="outAnim"),класс анимации закрытия окна,
+-- autoOpen: (boolean, default=false) specifies whether the window should be opened automatically by the plugin. Default is false, modal.open() method should be used to open the window.
+-- isStatic: (boolean, default=false) specifies whether the modal window is static or dynamic;
+-- modalInner: (html/el, default = null), content of the modal window when dynamically creating it. (The constructor creates an overlay, content wrapper, close button, and the content itself can be added in this setting);
+-- enableTransition: (boolean, default = true) if true, transition for window appearance is set. If false, animation can be set using a library (for example, GreenSock). In the case of external animation for a dynamic window, it is mandatory to specify animTime, which will be a delay when removing from the DOM (the value should be coordinated with the animation time of the library)
+-- animTime: (ms, default=null) animation time. This parameter should be specified when setting up animation using a library, as it also serves as a delay for removing the modal from the DOM
+-- easing: (string, default = 'ease') name of the easing function for transition
+-- elemToFocus: (string, default=null) pass the selector of the element that should be focused when opening the modal window. If not set, focus is set to the first focusable element in the modal
 
-Методы:
-  --modal.updateInner(html-string/el) - можно заменить/добавить контент динамической модалки, в момент клика по триггеру
-  --modal.open() - открывает модалку
-  --modal.close() - закрывает модалку
+//classes
+-- modalCloseBtnClass: (string, default-null) class of the close button (if any) (for dynamic windows, it also needs to be created independently)
+-- modalOverlayClass: (string, default="modal-overlay"), class of the overlay, default class is added when dynamically created, for static windows, appropriate classes need to be passed
+-- modalWrapperClass: (string, default="modal-wrapper"), class of the content wrapper
+-- modalAnimationClass: (string, default ="modalInitAnim"), class of the initial animation state.
+-- modalInAnimClass: (string, default="openAnim"), class of the window opening animation,
+-- modalOutAnimClass: (string, default="outAnim"), class of the window closing animation,
 
-События:
-Позволяют сделать что то с окном в момент открытия/закрытия (например анимацию). события всплывают, можно отловить на document, e.target = модальное окно
-  --modalOnOpen
-  --modalOnClose
+Methods:
+-- modal.updateInner(html-string/el) - can replace/add content of a dynamic modal, at the moment of clicking the trigger
+-- modal.open() - opens the modal
+-- modal.close() - closes the modal
 
-Примерный html для статичного окна:
-  <button class="trigger" type="button" data-path="1">open </button>
+Events:
+Allow doing something with the window at the moment of opening/closing (for example, animation). Events bubble up, can be caught on document, e.target = modal window
+-- modalOnOpen
+-- modalOnClose
+
+Example html for a static window:
+<button class="trigger" type="button" data-path="1">open </button>
+
   <div class="overlay" data-modal="1">
     <div class="content-wrapper" >
       <button class="close-btn" type="button">close</button>
   </div>
   </div>
+Notes:
+! If the window is dynamic, when creating its content, consider the close button if needed and pass its class in modalCloseBtnClass. By default, the window is without a button.
 
-Примечания:
-! если окно динамическое, то при создании его содержимого, нужно учесть кнопку закрытия если она нужна и передать ее класс в modalCloseBtnClass. по дефолту окно без кнопки.
+!! If there are elements with position: fixed in the document, they need to be assigned an additional class "fixed-el". This is necessary to remove the "jump" of content when opening the modal and blocking scroll.
 
-!! если в документе есть элементы с position: fixed, то им нужно назначить доп класс "fixed-el". Это нужно чтобы убрать "прыжок" контента при открытии модалки и блокировки скролла.
+!!! If normalize.css is not used in the project, it is necessary to reset the default margin of the body, if this is not done, the width of the scrollbar is incorrectly considered and the "jump" of the content is preserved.
 
-!!! если в прокете не используется normalize.css необходимо обнулить дефолтные margin у body, если этого не сделать некорректно считается ширина скроллбара и сохраняется "прыжок" контента.
-
-!!!! при открытии окна фокус будет сосредоточен на первом фокусируемом в разметке элементе (для динамического окна это обертка контента) чтобы назначить фокус на желаемый элемент нужно передать соответствующий селектор в elemToFocus.
+!!!! When opening the window, focus will be on the first focusable element in the markup (for dynamic windows, this is the content wrapper). To set focus to the desired element, pass the corresponding selector to elemToFocus.
 

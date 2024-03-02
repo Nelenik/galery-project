@@ -17,25 +17,29 @@
 
 <body>
   <header class="header">
-    <ul class="mg-reset nav">
-      <li class="nav__item">
+    <h1 class="header__mainTitle mg-reset">Title</h1>
+    <button class="burger btn-reset js-burger js-burger--open" aria-label="Открыть меню">
+      <span class="burger__line"></span>
+      <span class="burger__text">Menu</span>
+    </button>
+    <ul class="mg-reset nav js-menu js-menu--open">
+      <!-- <li class="nav__item">
         <a class="nav__link linkComp" href="#photoPage">Home</a>
+      </li> -->
+      <li class="nav__item">
+        <a class="nav__link linkComponent" href="#!">Join the conversation</a>
       </li>
       <li class="nav__item">
-        <a class="nav__link linkComp" href="#!">Join the conversation</a>
+        <a class="nav__link linkComponent" href="#!">Start the conversation</a>
       </li>
       <li class="nav__item">
-        <a class="nav__link linkComp" href="#!">Start the conversation</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link linkComp" href="#uploadPage">Upload image</a>
+        <a class="nav__link linkComponent" href="#uploadPage">Upload picture</a>
       </li>
     </ul>
   </header>
   <main class="main" id="main">
     <div class="photo-page section" id="photoPage">
       <div class="container">
-        <h1 class="photo-page__title mg-reset">Title</h1>
         <div class="photo-wrap">
           <button class="btn-reset photo-frame">
             <picture>
@@ -242,7 +246,7 @@
                   </svg>
                 </span>
               </label>
-              <button class="uploadForm__submit btn-reset linkComp">Submit</button>
+              <button class="uploadForm__submit btn-reset linkComponent">Submit</button>
 
             </div>
 

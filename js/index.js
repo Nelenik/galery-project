@@ -1,10 +1,13 @@
 import { modalInit } from "./parts/modal_init.js";
 import { initImagePreview } from "./parts/image_preview.js";
+import { initBurger } from "./parts/burger-menu.js";
 import { _ } from "./utils.js";
+
+initBurger();
 modalInit();
 initImagePreview();
 
-/* if is necessary to disable scroll activate code below */
+/* if is necessary to disable scroll activate code below and the link "Home" in menu*/
 // const mainBlock = document.getElementById("main");
 // mainBlock.addEventListener("wheel", (e) => {
 //   e.preventDefault();

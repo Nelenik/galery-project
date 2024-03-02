@@ -66,7 +66,7 @@ body {
   z-index: 1;
 }
 
-.linkComp {
+.linkComponent {
   background: var(--accent-gradient);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
@@ -80,7 +80,7 @@ body {
   box-shadow: 3px 3px 2px 0 rgba(18, 18, 18, 0.3294117647), inset 2px 2px 4px #683732, inset -2px -2px 4px #bf6b61;
   outline: none;
 }
-.linkComp::before {
+.linkComponent::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -89,16 +89,99 @@ body {
   background-color: rgba(255, 255, 255, 0.334);
   opacity: 0;
 }
-.linkComp:hover, .linkComp:focus-visible {
+.linkComponent:hover, .linkComponent:focus-visible {
   color: #dcf900;
   text-shadow: 2px 2px 2px #b73c35;
 }
 
+/**** BURGER ****/
+.burger {
+  position: relative;
+  border-radius: 5px;
+  width: 30px;
+  height: 25px;
+  translate: 25px;
+}
+.burger::after, .burger::before, .burger__line {
+  position: absolute;
+  content: "";
+  width: 80%;
+  height: 2px;
+  background-color: var(--gold-text);
+  left: 50%;
+}
+.burger::after {
+  bottom: 10%;
+  translate: -50%;
+}
+.burger::before {
+  top: 10%;
+  translate: -50%;
+}
+.burger__line {
+  top: 50%;
+  translate: -50% -50%;
+}
+.burger__text {
+  color: var(--gold-text);
+  position: absolute;
+  top: 105%;
+  left: 50%;
+  translate: -50%;
+}
+
+.js-burger::before, .js-burger::after {
+  transition: rotate 0.4s ease, translate 0.4s ease, top 0.4s ease, bottom 0.4s ease;
+}
+.js-burger--open .burger__line {
+  opacity: 0;
+}
+.js-burger--open::before {
+  rotate: 45deg;
+  translate: -50% -50%;
+  top: 50%;
+}
+.js-burger--open::after {
+  rotate: -45deg;
+  bottom: 50%;
+  translate: -50% 50%;
+}
+
+.js-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  transform: translate(-100%, 0);
+  transform-origin: left;
+  visibility: hidden;
+  transition: transform 0.4s linear, visibility 0.4s linear;
+}
+.js-menu--open {
+  transform: translate(0, 0);
+  visibility: visible;
+}
+
+/********/
 .header {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  padding: 7px 0 25px;
+}
+.header__mainTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 10px 0;
+  color: var(--gold-text);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.508);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .nav {
@@ -514,7 +597,7 @@ body {
 .photo-frame:nth-child(17) {
   --maxWidth: 13%;
   --t: 38%;
-  --l: -5%;
+  --l: -1%;
   --transform: perspective(1000px) rotateX(4deg) rotateZ(15deg);
   transform-origin: 50% 50% 0px;
   --shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.87);
@@ -549,7 +632,7 @@ body {
 }
 .photo-frame:nth-child(19) {
   --maxWidth: 17%;
-  --t: -2%;
+  --t: 5%;
   --l: 45%;
   --transform: perspective(1000px) rotateX(4deg) rotateZ(10deg);
   transform-origin: 50% 50% 0px;
